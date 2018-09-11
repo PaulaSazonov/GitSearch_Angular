@@ -33,3 +33,20 @@
 .description {
     font-size: 18px;
 }
+label {
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+    padding-inline-end: 30px;
+}
+input {
+    border-radius: 5px;
+    margin-bottom: 0.5%;
+    height: 20px;
+}
+.ng-valid {
+    border: 3px solid green;
+}
+.ng-invalid:not(form) {
+    border: 3px solid red;
+}
