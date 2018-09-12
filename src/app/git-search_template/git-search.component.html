@@ -1,10 +1,15 @@
 <h1>{{title}} - {{displayQuery}}</h1>
-<form (ngSubmit)="sendQuery()" [formGroup]="form">
+<form #myForm="ngForm" (ngSubmit)="sendQuery()">
   <div *ngFor="let key of modelKeys">
-    <label>{{key}} :</label>
-    <input name={{key}} placeholder="Enter {{key}} Here" formControlName="{{key}}" />
+    {{key}}
+    <input name={{key}} placeholder="Enter {{key}} Here" [(ngModel)]="model[key]" required *ngIf="key === 'q'" appNoSpecialChars />
+    <input name={{key}} placeholder="Enter {{key}} Here" [(ngModel)]="model[key]" minLength='2' maxlength='4' *ngIf="key === 'stars'" appNoSpecialChars />
+
+    <input name={{key}} placeholder="Enter {{key}} Here" [(ngModel)]="model[key]" *ngIf="key !== 'q' && key !== 'stars'" appNoSpecialChars />
+
   </div>
-  <button type="submit" [disabled]="!form.valid" >Submit</button>
+  <button type="submit" [disabled]="!myForm.valid" >Submit</button>
+
 </form>
 <div *ngIf="searchResults; else elseBlock">
 <h3 class="total" *ngIf="searchResults.total_count > 0; else noResultsBlock">Total Results: {{searchResults.total_count}}</h3>
